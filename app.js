@@ -6,17 +6,13 @@ const PORT = process.env.PORT || 3000;
 const IP = process.env.IP || 'localhost'; // 127.0.0.1
 const path = require('path')
 
-console.log(process.env.IP)
-
-
 // creating a new app 
 const app = express();
 
+// applying middleware
 app.use(morgan('dev'));
 app.use(compression());
-
-app.use('/', express.static(path.join(__dirname, 'public')))
-
+app.use('/', express.static(path.join(__dirname, 'public')));
 
 // creating a server 
 const mainServer = app.listen(PORT, IP, ()=> {
@@ -37,7 +33,5 @@ mainSocket.on('connection', (socket) => {
     socket.on('send', (data) => {
         mainSocket.emit('send', data);
     });
-
-
 })
 

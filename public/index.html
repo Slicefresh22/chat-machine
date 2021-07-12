@@ -36,7 +36,7 @@
                     <div class="card-header">Messages</div>
                     <div class="card-body">
                         <ul id="message-panel">
-                            
+                            <!-- Message will be appended here -->
                         </ul>
                     </div>
                 </div>
@@ -44,10 +44,10 @@
                 <label id="text-status"></label>
                 <form>
                     <div class="form-group">
-                        <input class="form-control" type="text" id="text-message"
-                        placeholder="Please enter your message" style="height: 70px;">
+                        <textarea class="form-control" id="text-message"
+                            placeholder="Please enter your message" style="height: 70px;" value="">
 
-                        </input>
+                        </textarea>
                         <br>
                         <button class="btn btn-dark" id="send-btn">Send</button>
                     </div>
