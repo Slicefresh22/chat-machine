@@ -12,7 +12,7 @@ $(document).ready(() => {
           ValidName = true;
       }
   }while(ValidName === false)
-
+  
   const socket = io.connect(`${ URL }`);
 
   // creating variables for getting data from frontend
@@ -20,6 +20,7 @@ $(document).ready(() => {
   const messagePanel = document.querySelector("#message-panel");
   const sendButton = document.querySelector("#send-btn");
   const errorStatus = document.querySelector("#text-status");
+  const connectionList = document.querySelector("#connection-list");
 
   // initialize variables
   message.value = ''
@@ -69,10 +70,25 @@ $(document).ready(() => {
       elem.innerHTML = `${message}`;
     }
 
-    // appending li element to ul element
     messagePanel.appendChild(elem);
     messagePanel.appendChild(breakElem);
   });
+
+  socket.on("available-rooms", (data)=> {
+    data.forEach(room => {
+      const li = document.createElement("li");
+      const br = document.createElement("br"); 
+      const span = document.createElement("span");
+      span.style= "cursor: pointer"
+      room.connected == false ? span.className = "badge badge-dark badge-pill": span.className = "badge badge-success badge-pill"
+      span.innerHTML = 'Connect'
+      span.onclick= RoomConnect(room.roomId)
+      li.className = 'list-group-item d-flex justify-content-between align-items-center'; 
+      li.innerHTML = `${room.name}`;
+      li.appendChild(span);
+      connectionList.appendChild(li);
+    })
+  })
 
   
   const SendMessage = () => {
@@ -85,5 +101,11 @@ $(document).ready(() => {
       message.value = '';
     }
   }
+
+  const RoomConnect = (id)=> event => {
+    event.preventDefault();
+    socket.emit('room-connected', {id})
+  };
+
 });
 
