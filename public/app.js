@@ -1,7 +1,7 @@
 $(document).ready(() => {
   let _name;
   let ValidName = false;
-  let URL = 'http://localhost:3000';
+  let URL = 'http://localhost:8080'; 
 
   do{
       _name = prompt("Welcome, What is your name?");
@@ -13,7 +13,7 @@ $(document).ready(() => {
       }
   }while(ValidName === false)
   
-  const socket = io.connect(`${ URL }`);
+  const socket = io(`${ URL }`, { path: '/dev' });
 
   // creating variables for getting data from frontend
   const message = document.querySelector("#text-message");
@@ -55,19 +55,23 @@ $(document).ready(() => {
     const { message, username } = data;
 
     // creating a new li element for messages 
-    let elem = document.createElement("li");
+    let elem = document.createElement("div");
     let breakElem = document.createElement("br");
-    elem.style ="list-style-type : none;";
+    //elem.style ="list-style-type : none;";
 
     // if you are not the sender
     if (username != _name) {
-      elem.className = `badge badge-primary`;
-      elem.style = "float: right; font-size: 0.9em;";
-      elem.innerHTML = `${username}: ${message}`;
+      elem.className = `balon1 p-2 m-0 position-relative mb-2`;
+      const atag = document.createElement("a");
+      atag.className = "float-right"
+      atag.innerHTML = `${username}: ${message}`;
+      elem.appendChild(atag);
     } else {
-      elem.className = `badge badge-success`;
-      elem.style = "float: left; font-size: 0.9em; ";
-      elem.innerHTML = `${message}`;
+      elem.className = `balon2 p-2 m-0 position-relative mt-2`;
+      const atag = document.createElement("a");
+      atag.className = "float-left";
+      atag.innerHTML = `${message}`;
+      elem.appendChild(atag);
     }
 
     messagePanel.appendChild(elem);

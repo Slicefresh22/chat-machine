@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="./main.css">
     <title> Chat App </title>
 </head>
 
@@ -56,7 +57,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Messages</div>
-                    <div class="card-body">
+                    <div class="card-body overflow-hidden">
                         <ul id="message-panel">
                             <!-- Message will be appended here -->
                         </ul>
@@ -66,10 +67,9 @@
                 <label id="text-status"></label>
                 <form>
                     <div class="form-group">
-                        <textarea class="form-control" id="text-message"
-                            placeholder="Please enter your message" style="height: 70px;" value="">
-
-                        </textarea>
+                        <div class="form-outline">
+                            <textarea placeholder="Please enter your message" class="form-control"id="text-message" rows="3"></textarea>
+                        </div>
                         <br>
                         <button class="btn btn-dark" id="send-btn">Send</button>
                     </div>
